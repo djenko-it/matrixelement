@@ -16,7 +16,7 @@ services:
       - traefik.http.routers.synapse.rule=Host(`matrix.${DOMAIN}`)
       - traefik.http.routers.synapse.tls=true
       - traefik.http.routers.synapse.tls.certresolver=letsencrypt
-
+      
   synapse_db:
     image: "docker.io/postgres:${POSTGRES_VERSION}"
     restart: unless-stopped
