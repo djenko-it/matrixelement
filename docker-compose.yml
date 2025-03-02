@@ -4,6 +4,8 @@ services:
   synapse:
     image: "docker.io/matrixdotorg/synapse:${SYNAPSE_VERSION}"
     restart: unless-stopped
+    environment:
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
     volumes:
       - .synapse_data:/data
     depends_on:
@@ -16,7 +18,7 @@ services:
       - traefik.http.routers.synapse.rule=Host(`matrix.${DOMAIN}`)
       - traefik.http.routers.synapse.tls=true
       - traefik.http.routers.synapse.tls.certresolver=letsencrypt
-      
+
   synapse_db:
     image: "docker.io/postgres:${POSTGRES_VERSION}"
     restart: unless-stopped
